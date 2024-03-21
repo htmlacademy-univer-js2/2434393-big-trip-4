@@ -1,9 +1,10 @@
 import { createFilterTemplate } from '../template/filter-tempalte.js';
 import { createElement } from '../render.js';
+import { POINT_FILTERS } from '../const.js';
 
 export default class FilterView {
   getTemplate() {
-    return createFilterTemplate();
+    return createFilterTemplate({filters: POINT_FILTERS});
   }
 
   getElement() {
