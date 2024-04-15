@@ -58,6 +58,8 @@ const getRandomDate = ({next = false} = {}) => {
   return date;
 };
 
+export const isEscapeKey = (evt) => evt.key === 'Escape';
+
 export { getLastWord, capitalize, formatStringToDateTime, formatStringToShortDate,
   formatStringToTime, getPointDuration, getRandomInteger, getRandomValue, getRandomDate,
   getRandomElementsFromArray};

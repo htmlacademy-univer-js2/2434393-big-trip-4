@@ -31,11 +31,11 @@ const POINT_FILTERS = [
 ];
 
 const POINT_SORTS = [
-  'day',
-  'event',
-  'time',
-  'price',
-  'offers',
+  { type: 'day', isDisabled: false },
+  { type: 'event', isDisabled: true },
+  { type: 'time', isDisabled: false },
+  { type: 'price', isDisabled: false },
+  { type: 'offers', isDisabled: true },
 ];
 
 const POINT_EMPTY = {
