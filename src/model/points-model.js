@@ -1,14 +1,10 @@
-export default class PointsModel {
-  #service = null;
-  #points = [];
+import { createPoint } from '../mock/task';
 
-  constructor({service}){
-    this.#service = service;
-    this.#points = this.#service.getPoints();
+export default class pointsModel {
 
-  }
+  #point = Array.from({ length: 10 }, createPoint);
 
-  getAll() {
-    return this.#points;
+  get point() {
+    return this.#point;
   }
 }
