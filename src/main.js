@@ -1,31 +1,25 @@
-import TripInfoView from './view/trip-info-view.js';
-import FilterView from './view/filter-view.js';
-import TripPresenter from './presenter/trip-presenter.js';
-import DestinationsModel from './model/destinations-model.js';
-import OffersModel from './model/offers-model.js';
+import { render } from './framework/render.js';
+import FiltersView from './view/filters-view.js';
+import TripEventsPresenter from './presenter/trip-events-presenter.js';
+import SiteMenuView from './view/site-menu-view.js';
 import PointsModel from './model/points-model.js';
-import MockService from './service/mock-service.js';
-import { render, RenderPosition } from './framework/render.js';
+import { getPoints, getDestinations, getOffersByType } from './mock/point.js';
+import { generateFilter } from './mock/filter.js';
 
-const bodyElement = document.querySelector('body');
-const tripInfoElement = bodyElement.querySelector('.trip-main');
-const filterElement = tripInfoElement.querySelector('.trip-controls__filters');
-const eventListElement = bodyElement.querySelector('.trip-events');
-const service = new MockService();
-const destinationsModel = new DestinationsModel({service});
-const offersModel = new OffersModel({service});
-const pointsModel = new PointsModel({service});
+const siteHeaderElement = document.querySelector('.trip-main');
+const siteMainElement = document.querySelector('.page-main');
+const tripPresenter = new TripEventsPresenter(siteMainElement.querySelector('.trip-events'));
 
-const tripPresenter = new TripPresenter({
-  container: eventListElement,
-  destinationsModel,
-  offersModel,
-  pointsModel
-});
+const points = getPoints();
+const offersByType = getOffersByType();
+const destinations = getDestinations();
 
+const pointsModel = new PointsModel();
+pointsModel.init(points, destinations, offersByType);
+tripPresenter.init(pointsModel);
 
-render(new TripInfoView(), tripInfoElement, RenderPosition.AFTERBEGIN);
-render(new FilterView(), filterElement);
-tripPresenter.init();
+const filters = generateFilter(pointsModel.points);
 
+render(new FiltersView({filters}), siteHeaderElement.querySelector('.trip-controls__filters'));
+render(new SiteMenuView(), siteHeaderElement.querySelector('.trip-controls__navigation'));
 
