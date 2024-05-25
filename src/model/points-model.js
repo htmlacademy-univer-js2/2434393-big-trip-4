@@ -1,10 +1,23 @@
-import { createPoint } from '../mock/task';
+export default class PointsModel {
+  #points = [];
+  #destinations = [];
+  #offers = [];
 
-export default class pointsModel {
+  init(points, destinations, offers) {
+    this.#points = points;
+    this.#destinations = destinations;
+    this.#offers = offers;
+  }
 
-  #point = Array.from({ length: 10 }, createPoint);
+  get points() {
+    return this.#points;
+  }
 
-  get point() {
-    return this.#point;
+  get destinations() {
+    return this.#destinations;
+  }
+
+  get offers() {
+    return this.#offers;
   }
 }
